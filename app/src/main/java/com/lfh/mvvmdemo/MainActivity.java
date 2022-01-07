@@ -13,11 +13,12 @@ import com.lfh.mvvmdemo.viewmodel.TestViewModel;
 
 import java.util.HashMap;
 import java.util.Map;
+
 /**
-* @author:  lfh
-* @date:  2022/1/6
-* @note:    mvvm  请求示例
-*/
+ * @author: lfh
+ * @date: 2022/1/6
+ * @note: mvvm  请求示例
+ */
 public class MainActivity extends BaseViewModelActivity<ActivityMainBinding> {
 
     private TestViewModel testViewModel;
@@ -39,7 +40,7 @@ public class MainActivity extends BaseViewModelActivity<ActivityMainBinding> {
                 map.put("deviceid", "aa1d26623a1b668e");
                 testViewModel.test(map);
             }
-        },2000);
+        }, 5000);
 
         inflate.tvName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +48,6 @@ public class MainActivity extends BaseViewModelActivity<ActivityMainBinding> {
                 initData();
             }
         });
-
 
 
     }
@@ -63,7 +63,7 @@ public class MainActivity extends BaseViewModelActivity<ActivityMainBinding> {
         testViewModel.liveData.observe(this, new Observer<Object>() {
             @Override
             public void onChanged(Object o) {
-                Log.e("TAG", "onChanged: "+o.toString());
+                Log.e("TAG", "onChanged: " + o.toString());
             }
         });
     }
@@ -73,7 +73,7 @@ public class MainActivity extends BaseViewModelActivity<ActivityMainBinding> {
     protected void initData() {
         inflate.viewPager.setVisibility(View.VISIBLE);
         mVaryViewHelper.showDataView();
-          inflate.tvName.setVisibility(View.GONE);
+        inflate.tvName.setVisibility(View.GONE);
         initPager();
 
     }

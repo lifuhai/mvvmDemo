@@ -18,12 +18,12 @@ public  class BaseViewModelFragment<T extends ViewBinding> extends BaseFragment<
         baseViewModel.liveError.observe(this, new Observer<String>() {
             @Override
             public void onChanged(String error) {
-                error(error);
+                onError(error);
             }
         });
     }
 
-    private void error(String error) {
+    protected void onError(String error) {
 
     }
 }

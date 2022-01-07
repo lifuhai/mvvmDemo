@@ -1,8 +1,9 @@
 package com.lfh.frame.retrofit;
 
 import androidx.annotation.NonNull;
-import androidx.viewbinding.BuildConfig;
 
+
+import com.lfh.frame.BuildConfig;
 
 import java.io.IOException;
 import java.util.HashMap;

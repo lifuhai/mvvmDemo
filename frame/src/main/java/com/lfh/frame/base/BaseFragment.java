@@ -1,6 +1,7 @@
 package com.lfh.frame.base;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.viewbinding.ViewBinding;
 
 import com.lfh.frame.R;
 import com.lfh.frame.preview.VaryViewHelper;
+import com.lfh.frame.widget.LoadingDialog;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -25,7 +27,10 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment {
 
     public VaryViewHelper mVaryViewHelper;
     protected T binding;
-
+    /**
+     *   loading
+     */
+    public LoadingDialog mLoadingDialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -68,6 +73,29 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment {
                 });
     }
 
+
+    /**
+     *   初始化loading 弹窗
+     * @param text
+     */
+    protected void initLoading(String text) {
+        mLoadingDialog = new LoadingDialog(getActivity());
+        if (TextUtils.isEmpty(text) ) {
+            mLoadingDialog.setDialogText("加载中...");
+        }else {
+            mLoadingDialog.setDialogText(text);
+        }
+        mLoadingDialog.showDialog();
+    }
+
+    /**
+     *  取消弹窗
+     */
+    protected void cancelLoading() {
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
+    }
 
     @Override
     public void onDestroyView() {

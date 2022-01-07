@@ -26,10 +26,7 @@ public class VaryViewHelper {
      * 数据为空的页面
      */
     public View mEmptyView;
-    /**
-     * 正在加载页面的进度环
-     */
-    public ImageView imageView;
+
 
 
     private String text;
@@ -68,7 +65,6 @@ public class VaryViewHelper {
     public void setUpLoadingView(View view) {
         mLoadingView = view;
         mLoadingView.setClickable(true);
-        imageView = (ImageView) view.findViewById(R.id.image);
     }
 
 
@@ -105,7 +101,6 @@ public class VaryViewHelper {
 
     public void showLoadingView() {
         mViewHelper.showCaseLayout(mLoadingView);
-        startProgressLoading();
     }
 
     public void showDataView() {
@@ -113,10 +108,7 @@ public class VaryViewHelper {
     }
 
 
-    private void startProgressLoading() {
-        Glide.with(imageView.getContext()).asGif().load(R.drawable.loading)
-                .into(imageView);
-    }
+
 
     public void releaseVaryView() {
         mErrorView = null;

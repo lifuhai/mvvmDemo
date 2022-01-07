@@ -1,4 +1,4 @@
-package com.lfh.frame.retrofit;
+package com.lfh.mvvmdemo.mode;
 
 import java.util.Map;
 
@@ -22,7 +22,6 @@ public interface IRequestService {
     Observable<Object> updateUMDeviceToken( @QueryMap Map<String,String>map);
 
 
-    @FormUrlEncoded
-    @POST("cntmiService2/WebService")
-    Observable<Object> getBILLName(@FieldMap Map<String,String>map);
+    @GET("v1/app_usersorders/?users_id=61d553da2e3fadf10dfd6827")
+    Observable<Test> getBILLName();
 }

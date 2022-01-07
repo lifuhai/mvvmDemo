@@ -43,4 +43,5 @@ public class FirstFragment extends BaseViewModelFragment<FragmentFirstBinding> {
             }
         });
     }
+
 }

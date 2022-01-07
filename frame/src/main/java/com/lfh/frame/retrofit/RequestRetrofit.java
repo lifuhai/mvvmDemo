@@ -10,19 +10,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
 * @note:      创建 RequestRetrofit 执行头
 */
 public class RequestRetrofit {
-    private static IRequestService requestService;
+//    private static IRequestService requestService;
 
+    private static   Retrofit retrofit;
     static {
-        Retrofit retrofit = new Retrofit.Builder()
+         retrofit = new Retrofit.Builder()
                 .baseUrl("")
                 .client(HttpClientHelper.getOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-        requestService = retrofit.create(IRequestService.class);
+//        requestService = retrofit.create(IRequestService.class);
     }
+//
+//    public static IRequestService getInstance() {
+//        return requestService;
+//    }
 
-    public static IRequestService getInstance() {
-        return requestService;
+    public  static  Retrofit retrofit(){
+        return retrofit;
     }
 }

@@ -2,6 +2,7 @@ package com.lfh.frame.base;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -11,6 +12,7 @@ import androidx.viewbinding.ViewBinding;
 
 import com.lfh.frame.R;
 import com.lfh.frame.preview.VaryViewHelper;
+import com.lfh.frame.widget.LoadingDialog;
 import com.zackratos.ultimatebarx.library.UltimateBarX;
 
 import java.lang.reflect.Method;
@@ -23,9 +25,15 @@ import java.lang.reflect.ParameterizedType;
  */
 public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActivity {
 
+    /**
+     *   视图切换
+     */
     public VaryViewHelper mVaryViewHelper;
-
     public T inflate;
+    /**
+     *   loading
+     */
+    public LoadingDialog mLoadingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +58,29 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
 
     protected abstract void initData();
 
+
+    /**
+     *   初始化loading 弹窗
+     * @param text
+     */
+    protected void initLoading(String text) {
+        mLoadingDialog = new LoadingDialog(this);
+        if (TextUtils.isEmpty(text) ) {
+            mLoadingDialog.setDialogText("加载中...");
+        }else {
+            mLoadingDialog.setDialogText(text);
+        }
+        mLoadingDialog.showDialog();
+    }
+
+    /**
+     *  取消弹窗
+     */
+    protected void cancelLoading() {
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
+    }
 
     public void hold(int id) {
 
