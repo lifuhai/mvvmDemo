@@ -25,12 +25,12 @@ import java.lang.reflect.Type;
  */
 public abstract class BaseFragment<T extends ViewBinding> extends Fragment {
 
-    public VaryViewHelper mVaryViewHelper;
     protected T binding;
     /**
-     *   loading
+     * loading
      */
     public LoadingDialog mLoadingDialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -51,45 +51,28 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment {
         initView();
     }
 
-    protected abstract void initView() ;
+    protected abstract void initView();
 
 
     protected abstract void initData();
 
-
-    public void hold(int id) {
-        mVaryViewHelper = new VaryViewHelper.Builder()
-                .setDataView(binding.getRoot().findViewById(id))//放数据的父布局，逻辑处理在该Activity中处理
-                .setLoadingView(LayoutInflater.from(getActivity()).inflate(R.layout.layout_loadingview, null))//加载页，无实际逻辑处理
-                .setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.layout_emptyview, null))//空页面，无实际逻辑处理
-                .setErrorView(LayoutInflater.from(getActivity()).inflate(R.layout.layout_errorview, null))//错误页面
-                .build();
-        mVaryViewHelper.mErrorView.findViewById(R.id.vv_error_refresh)
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        initData();
-                    }
-                });
-    }
-
-
     /**
-     *   初始化loading 弹窗
+     * 初始化loading 弹窗
+     *
      * @param text
      */
     protected void initLoading(String text) {
         mLoadingDialog = new LoadingDialog(getActivity());
-        if (TextUtils.isEmpty(text) ) {
+        if (TextUtils.isEmpty(text)) {
             mLoadingDialog.setDialogText("加载中...");
-        }else {
+        } else {
             mLoadingDialog.setDialogText(text);
         }
         mLoadingDialog.showDialog();
     }
 
     /**
-     *  取消弹窗
+     * 取消弹窗
      */
     protected void cancelLoading() {
         if (mLoadingDialog != null) {
@@ -97,12 +80,5 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment {
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (mVaryViewHelper != null) {
-            mVaryViewHelper.releaseVaryView();
-        }
 
-    }
 }
